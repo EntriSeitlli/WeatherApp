@@ -1,10 +1,22 @@
-<div class="container">
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search City" name="city" [(ngModel)]="cityName">
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
   <div class="upper-data">
-    <img src="../assets/hot.jpg" *ngIf="14 > 15">
-    <img src="../assets/cold.jpg" *ngIf="14 <= 15">
+    <div *ngIf="weatherData.timelines.daily[0].values.temperatureAvg > 15">
+      <img src="../assets/day.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 25">
+      <img src="../assets/hot.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg > 25">
+    </div>
+    <img src="../assets/cold.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 15">
     <div class="weather-data">
-      <div class="location">Wellington</div>
-      <div class="temperature">{{ 14.40 | number: '1.0-0' }}°C</div>
+      <div class="location" title="{{weatherData.location.name}}">
+        {{weatherData.location.name.split(',').shift()}}
+        <img src="../assets/pin.png">
+      </div>
+      <div class="temperature">{{ weatherData.timelines.daily[0].values.temperatureAvg | number: '1.0-0' }}°C</div>
     </div>
   </div>
   <div class="lower-data">
@@ -19,7 +31,7 @@
           <span>min</span>
         </div>
         <div class="info-block-value">
-          10°C
+          {{ weatherData.timelines.daily[0].values.temperatureMin | number: '1.1-1' }}°C
         </div>
       </div>
 
@@ -29,7 +41,7 @@
           <span>max</span>
         </div>
         <div class="info-block-value">
-          20°C
+          {{ weatherData.timelines.daily[0].values.temperatureMax | number: '1.1-1' }}°C
         </div>
       </div>
 
@@ -39,7 +51,7 @@
           <span>humidity</span>
         </div>
         <div class="info-block-value">
-          77%
+          {{ weatherData.timelines.daily[0].values.humidityAvg | number: '1.0-0' }}%
         </div>
       </div>
 
@@ -49,12 +61,14 @@
           <span>wind</span>
         </div>
         <div class="info-block-value">
-          11 km/h
+          {{ weatherData.timelines.daily[0].values.windSpeedAvg | number: '1.1-1' }} km/h
         </div>
       </div>
 
     </div>
   </div>
 </div>
+
+<div class="credit">Powered By <a href="https://rapidapi.com/tomorrow-tomorrow-default/api/tomorrow-io1" target="_blank">RapidAPI</a></div>
 
 <router-outlet></router-outlet>

@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { WeatherService } from './services/weather.service';
-import { HttpClientModule } from '@angular/common/http';
+import { WeatherData } from './models/weather.model';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -17,14 +13,26 @@ export class AppComponent implements OnInit {
 
   }
 
+  title: string = "WeatherApp";
+
+  cityName: string = "Athens Greece";
+  weatherData?: WeatherData;
+
   ngOnInit(): void {
-    this.weatherService.getWeatherData('Wellington')
+    this.getWeatherData(this.cityName)
+  }
+
+  onSubmit(){
+    this.getWeatherData(this.cityName)
+    this.cityName = '';
+  }
+
+  private getWeatherData(cityName: string){
+    this.weatherService.getWeatherData(cityName)
     .subscribe({
       next: (response) => {
-        console.log(response);
+        this.weatherData = <WeatherData>JSON.parse(JSON.stringify(response));
       }
     });
   }
-
-  title = 'WeatherApp';
 }
