@@ -7,14 +7,14 @@
 <div class="container" *ngIf="weatherData">
   <div class="upper-data">
     <div *ngIf="weatherData.timelines.daily[0].values.temperatureAvg > 15">
-      <img src="../assets/day.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 25">
-      <img src="../assets/hot.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg > 25">
+      <img src="./assets/day.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 25">
+      <img src="./assets/hot.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg > 25">
     </div>
-    <img src="../assets/cold.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 15">
+    <img src="./assets/cold.png" *ngIf=" weatherData.timelines.daily[0].values.temperatureAvg <= 15">
     <div class="weather-data">
       <div class="location" title="{{weatherData.location.name}}">
         {{weatherData.location.name.split(',').shift()}}
-        <img src="../assets/pin.png">
+        <img src="./assets/pin.png">
       </div>
       <div class="temperature">{{ weatherData.timelines.daily[0].values.temperatureAvg | number: '1.0-0' }}°C</div>
     </div>
@@ -27,7 +27,7 @@
 
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/min.png">
+          <img src="./assets/min.png">
           <span>min</span>
         </div>
         <div class="info-block-value">
@@ -37,7 +37,7 @@
 
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/max.png">
+          <img src="./assets/max.png">
           <span>max</span>
         </div>
         <div class="info-block-value">
@@ -47,7 +47,7 @@
 
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/humidity.png">
+          <img src="./assets/humidity.png">
           <span>humidity</span>
         </div>
         <div class="info-block-value">
@@ -57,7 +57,7 @@
 
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/wind.png">
+          <img src="./assets/wind.png">
           <span>wind</span>
         </div>
         <div class="info-block-value">
